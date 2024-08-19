@@ -10,6 +10,6 @@ namespace user_api.Services
         Task<UserModel?> UpdateUserAsync(int id, UserModel user);
         Task<UserModel?> DeleteUserAsync(int id);
         Task<List<UserModel>> GetAllUsersAsync();
-        Task<bool> AuthenticateUserAsync(string email, string password);
+        Task<UserModel> AuthenticateUserAsync(string email, string password);
     }
 }

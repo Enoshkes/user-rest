@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using user_api.Dto;
 using user_api.Models;
@@ -8,11 +9,17 @@ namespace user_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController(IUserService userService) : ControllerBase
+    public class UserController(IUserService userService, IJwtService jwtService) : ControllerBase
     {
 
         [HttpGet("enosh")]
-        public ActionResult<string> Enosh() => Ok("Enosh");
+        [Authorize]
+        public ActionResult<string> Enosh()
+        {
+            int a = 8;
+            return Ok("!!!");
+        }
+
 
 
         // get by id
@@ -37,6 +44,7 @@ namespace user_api.Controllers
 
 
         [HttpPost("create")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<UserModel>> CreateUser([FromBody] UserModel model)
@@ -91,13 +99,16 @@ namespace user_api.Controllers
         {
             try
             {
-                return await userService.AuthenticateUserAsync(loginDto.Email, loginDto.Password)
-                    ? Ok("Authenticated successfully")
-                    : Unauthorized();
+                UserModel authenticated = await userService.AuthenticateUserAsync(
+                    loginDto.Email, 
+                    loginDto.Password
+                );
+                return Ok(jwtService.GenerateToken(authenticated));
+                   
             }
             catch (Exception ex)
             {
-                return NotFound(ex.Message);
+                return Unauthorized(ex.Message);
             }
         }
 

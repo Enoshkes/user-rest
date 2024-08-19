@@ -48,14 +48,19 @@ namespace user_api.Services
             return byId;
         }
 
-        public async Task<bool> AuthenticateUserAsync(string email, string password)
+        public async Task<UserModel> AuthenticateUserAsync(string email, string password)
         {
             var user = await FindByEmailAsync(email)
                 ?? throw new Exception($"User by the email {email} does not exists");
 
-            var res = BCrypt.Net.BCrypt.Verify(password, user.Password);
+            var isValidPwd = BCrypt.Net.BCrypt.Verify(password, user.Password);
+            
+            if (!isValidPwd)
+            {
+                throw new Exception("Wrong connection details");
+            }
 
-            return res;
+            return user;
         }
     }
 }

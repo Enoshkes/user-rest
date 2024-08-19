@@ -135,3 +135,5 @@ C:\Users\enosh.tsur\source\repos\user-api\user-api\bin\Debug\net8.0\ru\Microsoft
 C:\Users\enosh.tsur\source\repos\user-api\user-api\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\enosh.tsur\source\repos\user-api\user-api\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\enosh.tsur\source\repos\user-api\user-api\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\enosh.tsur\source\repos\user-api\user-api\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\enosh.tsur\source\repos\user-api\user-api\obj\Debug\net8.0\user-api.sourcelink.json
